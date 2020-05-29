@@ -198,68 +198,62 @@ doctor's physical presence.<br></p>
   </section>
   <!--/ about-->
   <!--doctor team-->
-  <section id="doctor-team" class="section-padding">
+ <section id="covidtrac" class="section-padding">
     <div class="container">
       <div class="row">
-        <div class="col-md-15">
-          <h2 class="ser-title">Meet Our Doctors!</h2>
-          <hr class="botm-line">
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-6">
-          <div class="thumbnail">
-            <img src="img/doctor1.jpg" alt="..." class="team-img">
-            <div class="caption">
-              <h3>Jessica George</h3>
-              <p>Doctor</p>
-              <ul class="list-inline">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-6">
-          <div class="thumbnail">
-            <img src="img/doctor2.jpg" alt="..." class="team-img">
-            <div class="caption">
-              <h3>Steffy Nickson</h3>
-              <p>Doctor</p>
-              <ul class="list-inline">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-6">
-          <div class="thumbnail">
-            <img src="img/doctor3.jpg" alt="..." class="team-img">
-            <div class="caption">
-              <h3>Lena Bob</h3>
-              <p>Doctor</p>
-              <ul class="list-inline">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-6">
-          <div class="thumbnail">
-            <img src="img/doctor4.jpg" alt="..." class="team-img">
-            <div class="caption">
-              <h3>Pomy Paul</h3>
-              <p>Doctor</p>
-              <ul class="list-inline">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-              </ul>
-            </div>
-          </div>
+        <div class="col-md-10">
+        	 <h1 style="color: #0cb8b6; padding-top:12px; text-align: left; size: 30px">Covid 19 Tracker</h1>
+    <form action="" id="myForm"  style="color: black; text-align: left;">
+    <input type="text" id="country" placeholder="Country Name" required>
+     <input type="submit" value="Get Live Data" >
+    </form> 
+    <h1 id="confirmed"  style="color: black; text-align: left;"></h1>
+    <h1 id="recovered" style="color: black; text-align: left;"></h1>
+    <h1 id="deaths" style="color: black; text-align: left;"></h1>
+    </body>
+    <script>
+      var myForm=document.getElementById('myForm')
+
+      myForm.addEventListener('submit',function(e){
+
+        e.preventDefault()
+
+        var country=document.getElementById('country').value
+         
+         //fetch request
+         
+         var url = "https://api.covid19api.com/total/dayone/country/"+country
+         fetch(url)
+          .then((res) =>res.json())
+           .then((res) => {
+
+            console.log(res)
+            var length = res.length
+            var index = length - 1
+            var confirmed = document.getElementById('confirmed')
+            var recovered = document.getElementById('recovered')
+            var deaths = document.getElementById('deaths')
+             
+             confirmed.innerHTML=''
+             recovered.innerHTML=''
+             deaths.innerHTML=''
+
+
+
+             confirmed.append("Total Confirmed:"+res[index].Confirmed)
+             recovered.append("Total Recovered:"+res[index].Recovered)
+             deaths.append("Total Deaths:"+res[index].Deaths)
+
+           })
+
+
+      })
+
+      
+    </script>
+
+          
+
         </div>
       </div>
     </div>
